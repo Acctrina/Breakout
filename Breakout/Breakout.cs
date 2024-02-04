@@ -43,7 +43,7 @@ namespace Breakout
             winSFX = new SoundPlayer(@"C:\Users\User\Downloads\winSFX.wav");
             loseSFX = new SoundPlayer(@"C:\Users\User\Downloads\loseSFX.wav");
 
-
+            //Number of tiles generated for each difficulty
             difficultyLabel.Text = "Difficulty: " + difficulty;
             if (difficulty == "Easy")
             {
@@ -93,6 +93,7 @@ namespace Breakout
             gameEnd.Text = message;
         }
 
+        //Generates tile layout based on array
         private void LoadBlocks()
         {
 
@@ -143,14 +144,17 @@ namespace Breakout
         private void mainGameTimerEvent(object sender, EventArgs e)
         {
             txtScore.Text = "Score: " + score;
-            timerLabel.Text = "Timer: " + (value += 0.03).ToString("0.00") + " Seconds"; //Timer
 
-            if (moveLeft == true && player.Left > 0) //Left Boundry limit for Player
+            //Timer
+            timerLabel.Text = "Timer: " + (value += 0.03).ToString("0.00") + " Seconds"; 
+
+            //Left Boundry limit for Player
+            if (moveLeft == true && player.Left > 0) 
             {
                 player.Left -= playerSpeed;
             }
-
-            if (moveRight == true && player.Left < 750) // Right Boundry limit for player
+            //Right Boundry limit for player
+            if (moveRight == true && player.Left < 750) 
             {
                 player.Left += playerSpeed;
             }
@@ -158,7 +162,8 @@ namespace Breakout
             ball.Left += ballx;
             ball.Top += bally;
 
-            if (ball.Left < 0 || ball.Left > 900) //Boundry limits for ball
+            //Boundry limits for ball
+            if (ball.Left < 0 || ball.Left > 900) 
             {
                 ballx = -ballx;
                 bounceSFX.Play();
@@ -169,7 +174,8 @@ namespace Breakout
                 bounceSFX.Play();
             }
 
-            if (ball.Bounds.IntersectsWith(player.Bounds)) //Ball Speed for Respective Difficulties
+            //Ball Speed for Respective Difficulties
+            if (ball.Bounds.IntersectsWith(player.Bounds)) 
             {
 
                 ball.Top = 405;
@@ -190,6 +196,7 @@ namespace Breakout
 
             }
 
+            //Removes tiles which ball contacts
             foreach (Control x in this.Controls)
             {
                 if (x is PictureBox && (string)x.Tag == "blocks")
